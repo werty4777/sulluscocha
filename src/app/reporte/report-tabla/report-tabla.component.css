@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+th{
+    background-color: green;
+    color: black;
+}
+td,th{
+
+    margin-right: 10px !important;
+    padding-right: 50px !important;
+}

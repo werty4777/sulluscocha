@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+}
+
+td,th{
+
+    margin-right: 10px !important;
+    padding-right: 50px !important;
+}
+mat-select{
+    width: 100px;
+}

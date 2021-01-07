@@ -1,0 +1,343 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div (click)="confirmarOrden(entrega.value)" class="card-header card-header-danger" style="cursor:pointer;">
+                        <h4 class="card-title" style="text-align: center">Agregar Orden de Compra</h4>
+
+
+                    </div>
+
+                    <div class="card-body">
+                        <form [formGroup]="grupo">
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>RUC</h4>
+                                        <input formControlName="ruc"
+                                               matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Nombre</h4>
+                                        <input formControlName="nombre" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Direccion</h4>
+                                        <input formControlName="direccion" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Correo</h4>
+                                        <input formControlName="correo" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Telefono</h4>
+                                        <input formControlName="telefono" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="fill" color="accent">
+                                        <h4>Fecha entrega</h4>
+                                        <input #entrega [matDatepicker]="picker1"
+                                               matInput>
+
+                                        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Direccion Entrega</h4>
+                                        <input formControlName="direccionEntrega" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Moneda</mat-label>
+                                        <mat-select [(ngModel)]="selectedValue" formControlName="monedas" name="moneda">
+                                            <mat-option *ngFor="let moneda of monedas" [value]="moneda">
+                                                {{moneda}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Condicion de pago</h4>
+                                        <input formControlName="condicionPago" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Forma de pago</h4>
+                                        <input formControlName="formaPago" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Observaciones</h4>
+                                        <input formControlName="observaciones" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Numero de comprobante</h4>
+                                        <input formControlName="numeroComprobante" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <button (click)="add()">nuevo</button>
+
+                <table [dataSource]="data" mat-table>
+                    <!-- All columns -->
+                    <ng-container [matColumnDef]="displayedColumnsfields[0]">
+                        <th *matHeaderCellDef mat-header-cell> {{displayedColumnsfields[0]}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[0])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete" >
+                                <mat-option *ngFor="let tiposd of this.tipoData" [value]="tiposd.id">
+                                    {{tiposd.tipo}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[1]">
+                        <th *matHeaderCellDef mat-header-cell> {{displayedColumnsfields[1]}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[1])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              >
+
+                            <mat-option *ngFor="let tiposd of this.nombre" [value]="tiposd.nombre">
+                                {{tiposd.nombre}}
+                            </mat-option>
+                            </mat-autocomplete >
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[2]" style="width: 100%">
+                        <th *matHeaderCellDef mat-header-cell>{{displayedColumnsfields[2]}}  </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[2])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              [(ngModel)]="modeloseleccionado">
+
+                            <mat-option *ngFor="let tiposd of this.modelo" [value]="tiposd.modelo">
+                                {{tiposd.modelo}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[3]">
+                        <th *matHeaderCellDef mat-header-cell> {{displayedColumnsfields[3]}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[3])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              [(ngModel)]="marcaseleccionado">
+
+                            <mat-option *ngFor="let tiposd of this.marca" [value]="tiposd.marca">
+                                {{tiposd.marca}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[4]">
+                        <th *matHeaderCellDef mat-header-cell>  {{displayedColumnsfields[4]}}</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[4])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              [(ngModel)]="colorseleccionado">
+
+                            <mat-option *ngFor="let tiposd of this.color" [value]="tiposd.color">
+                                {{tiposd.color}}
+                            </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[5]">
+                        <th *matHeaderCellDef mat-header-cell> {{displayedColumnsfields[5]}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[5])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                    [(ngModel)]="tallaseleccionado"
+                                    [formControl]="element.get(displayedColumnsfields[5])">
+                                <mat-option *ngFor="let tiposd of this.talla" [value]="tiposd.talla">
+                                    {{tiposd.talla}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[6]">
+                        <th *matHeaderCellDef mat-header-cell>{{displayedColumnsfields[6]}}  </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[6])"
+
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[7]">
+                        <th *matHeaderCellDef mat-header-cell>{{displayedColumnsfields[7]}}  </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input #este
+
+                                   [formControl]="element.get(displayedColumnsfields[7])"
+                                   [matAutocomplete]="auto"
+                                   aria-label="Number"
+                                   matInput placeholder="Pick one" type="text">
+                            <mat-autocomplete #auto="matAutocomplete"
+                                        [formControl]="element.get(displayedColumnsfields[7])">
+                                <mat-option *ngFor="let tiposd of this.uniadMedida" [value]="tiposd.unidad">
+                                    {{tiposd.unidad}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[8]">
+                        <th *matHeaderCellDef mat-header-cell>{{displayedColumnsfields[8]}}  </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input [formControl]="element.get(displayedColumnsfields[8])" type="text">
+                        </td>
+
+                    </ng-container>
+                    <ng-container [matColumnDef]="displayedColumnsfields[9]">
+                        <th *matHeaderCellDef mat-header-cell>{{displayedColumnsfields[9]}}  </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input [formControl]="element.get(displayedColumnsfields[9])" type="text">
+                        </td>
+
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="borrar">
+                        <th *matHeaderCellDef mat-header-cell></th>
+                        <td *matCellDef="let element;let i=index;" mat-cell>
+                            <button (click)="delete(i)" arrow-div mat-button>delete</button>
+                        </td>
+                    </ng-container>
+
+
+                    <tr *matHeaderRowDef="displayedColumns " mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+                </table>
+
+            </div>
+            <div><br></div>
+        </div>
+    </div>
+</div>
+
