@@ -9,5 +9,6 @@ export interface ProductModel {
 
     precio;
     tipo;
+    cantidad;
 }
 

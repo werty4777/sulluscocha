@@ -56,6 +56,10 @@
                                         <th *matHeaderCellDef mat-header-cell mat-sort-header> precio</th>
                                         <td  *matCellDef="let row; let i = index" mat-cell> {{row.precio}} </td>
                                     </ng-container>
+                                    <ng-container matColumnDef="cantidad">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> precio</th>
+                                        <td  *matCellDef="let row; let i = index" mat-cell> {{row.cantidad}} </td>
+                                    </ng-container>
 
 
                                     <tr *matHeaderRowDef="columnas" mat-header-row></tr>

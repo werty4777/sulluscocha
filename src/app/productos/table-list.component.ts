@@ -13,7 +13,7 @@ import {MatSort} from '@angular/material/sort';
 export class TableListComponent implements AfterViewInit {
 
 
-    columnas: string[] = ['codigo', 'descripcion', 'marca', 'modelo', 'color', 'talla', 'tipo', 'precio']
+    columnas: string[] = ['codigo', 'descripcion', 'marca', 'modelo', 'color', 'talla', 'tipo', 'precio','cantidad']
 
     resultsLength = 0;
     isLoadingResults = true;
