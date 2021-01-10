@@ -49,17 +49,17 @@ export class AuthInterceptorService implements HttpInterceptor {
 
                         localStorage.setItem('gmail', 'true');
                         // @ts-ignore
-                        localStorage.setItem('token', JSON.stringify(value.xc.access_token));
-                        this.cardService.getRol().subscribe(value => {
+                        localStorage.setItem('token', JSON.stringify(value.getAuthResponse().access_token).replace('"', '').replace('"', ''));
+                        this.cardService.getRol().subscribe(value2 => {
 
                             // @ts-ignore
-                            localStorage.setItem('rol', String(value.rol));
+                            localStorage.setItem('rol', String(value2.rol));
                             // @ts-ignore
-                            localStorage.setItem('id', String(value.idalmacen));
+                            localStorage.setItem('id', String(value2.idalmacen));
                             // @ts-ignore
-                            localStorage.setItem('cargo', String(value.cargo));
+                            localStorage.setItem('cargo', String(value2.cargo));
                             // @ts-ignore
-                            localStorage.setItem('almacen', String(value.almacen));
+                            localStorage.setItem('almacen', String(value2.almacen));
 
 
                         })

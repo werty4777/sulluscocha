@@ -66,8 +66,10 @@ export class ServiceOAuthService {
                 user => {
 
                     localStorage.setItem('gmail', 'true');
+
+                    console.log()
                     // @ts-ignore
-                    localStorage.setItem('token', JSON.stringify(user.xc.access_token).replace('"', '').replace('"', ''));
+                    localStorage.setItem('token', JSON.stringify(user.getAuthResponse().access_token).replace('"', '').replace('"', ''));
                     this.user = user
                     this.handleAuthChange();
                     this.authInstance.isSignedIn.listen(this.handleAuthChange);

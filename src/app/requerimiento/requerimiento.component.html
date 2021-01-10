@@ -40,12 +40,9 @@
                                 <th>
                                     Detalles
                                 </th>
-                                <th>
-                                    Editar
 
-                                </th>
                                 <th>
-                                    Eliminar
+                                    Rechazar
                                 </th>
                                 </thead>
                                 <tbody>
@@ -74,16 +71,12 @@
                                            class="fas fa-search"></i>
 
                                     </td>
-                                    <td>
 
-                                        <i (click)="verRequerimiento('editar',dat.codigo,dat.tipoRequerimiento)"
-                                           class="fas fa-pencil-alt"></i>
 
-                                    </td>
 
                                     <td>
 
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt" (click)="rechazarRequerimiento(dat.codigo)"></i>
 
                                     </td>
                                 </tr>
@@ -102,7 +95,7 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Peticiones de requerimientos</h4>
-                        <p class="card-category"> Lista de requerimientos realizidas por este almacen</p>
+                        <p class="card-category"> Lista de peticiones de requerimientos</p>
                     </div>
 
                     <div class="card-body">
@@ -128,12 +121,9 @@
                                 <th>
                                     Detalles
                                 </th>
-                                <th>
-                                    Editar
 
-                                </th>
                                 <th>
-                                    Eliminar
+                                    Rechazar
                                 </th>
                                 </thead>
                                 <tbody>
@@ -162,16 +152,11 @@
                                            class="fas fa-search"></i>
 
                                     </td>
-                                    <td>
 
-                                        <i (click)="verRequerimiento('editar',dat.codigo)"
-                                           class="fas fa-pencil-alt"></i>
-
-                                    </td>
 
                                     <td>
 
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-trash-alt" (click)="rechazarRequerimientoTraslado(dat.codigo)"></i>
 
                                     </td>
                                 </tr>

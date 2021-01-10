@@ -52,7 +52,8 @@ import {ReportTablaComponent} from '../../reporte/report-tabla/report-tabla.comp
 import {OrdenesComponent} from '../../ordenes/ordenes.component';
 import {MovimientosComponent} from '../../movimientos/movimientos.component';
 import {RequerimientoComponent} from '../../requerimiento/requerimiento.component';
-
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {myRxStompConfig} from '../../notifications/myRxStompConfig';
 @NgModule({
     imports: [
         CommonModule,
@@ -114,6 +115,8 @@ import {RequerimientoComponent} from '../../requerimiento/requerimiento.componen
         NotificationsComponent,
         RequerimientoComponent, MovimientosComponent, OrdenesComponent, ReportTablaComponent
 
+    ],
+    providers:[
     ]
 })
 

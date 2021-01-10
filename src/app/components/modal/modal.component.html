@@ -24,9 +24,6 @@
         <app-modal-editar-requerimiento [idRequerimiento]="this.data.codigo" [op]="3"></app-modal-editar-requerimiento>
     </ng-container>
 
-    <ng-container *ngIf="'editar'==this.data.data">
-        <app-modal-editar-requerimiento [idRequerimiento]="this.data.codigo" [op]="2"></app-modal-editar-requerimiento>
-    </ng-container>
 
     <ng-container *ngIf="'detalleSalida'==this.data.data">
         <app-salida-modal [codigo]="this.data.codigo"></app-salida-modal>

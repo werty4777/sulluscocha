@@ -96,4 +96,23 @@ export class RequerimientoComponent implements OnInit {
 
         })
     }
+
+    rechazarRequerimiento(codigo: string) {
+
+        this.req.rechazarRequerimiento(codigo).subscribe(value => {
+            alert('Requerimiento rechazado con exito');
+            this.cargarTodo();
+        });
+
+
+    }
+    rechazarRequerimientoTraslado(codigo: string) {
+
+        this.req.rechazarRequerimientoTraslado(codigo).subscribe(value => {
+            alert('Requerimiento rechazado con exito');
+            this.cargarTodo();
+        });
+
+
+    }
 }

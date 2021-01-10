@@ -219,7 +219,7 @@ export class ModalRequerimientoComponent implements OnInit {
 
         this.requerimentoService.agregarRequerimientoGeneral(dataReq).subscribe(value => {
 
-            alert('requerimiento guardado con exito')
+            alert('requerimiento general guardado con exito')
         }, error => {
             alert('ups algo sucedio ' + error.error)
         })

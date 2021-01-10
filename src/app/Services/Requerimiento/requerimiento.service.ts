@@ -232,4 +232,12 @@ export class RequerimientoService {
     }
 
 
+    rechazarRequerimiento(codigo: string): Observable<any> {
+
+        return this.http.delete(this.url.getURL() + 'inventario/requerimiento/' + codigo);
+    }
+
+    rechazarRequerimientoTraslado(codigo: string): Observable<any> {
+        return this.http.delete(this.url.getURL() + 'inventario/requerimiento/traslado/' + codigo);
+    }
 }

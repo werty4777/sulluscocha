@@ -19,9 +19,10 @@ import {CardsServiceService} from './Services/cards-service.service';
 import {UrlAPI} from './Services/urlAPI';
 import {AuthInterceptorService} from './interceptor/auth-interceptor.service';
 import {UserServiceComponent} from './authService/user-service/user-service.component';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {myRxStompConfig} from './notifications/myRxStompConfig';
 
 const googlekey = '583458414138-ktvu19p22476kqobfauu66r5olulppjg.apps.googleusercontent.com';
-
 
 @NgModule({
     imports: [
@@ -65,7 +66,16 @@ const googlekey = '583458414138-ktvu19p22476kqobfauu66r5olulppjg.apps.googleuser
             useClass: AuthInterceptorService,
             multi: true
 
-        }, OrderServiceService, CardsServiceService, UrlAPI
+        }, OrderServiceService, CardsServiceService, UrlAPI, {
+            provide: InjectableRxStompConfig,
+            useValue: myRxStompConfig
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
+            deps: [InjectableRxStompConfig]
+
+        }
     ],
     exports: [],
     bootstrap: [AppComponent]

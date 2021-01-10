@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as Chartist from 'chartist';
 import {ServiceOAuthService} from '../authService/service-oauth.service';
 import {CardsServiceService} from '../Services/cards-service.service';
@@ -11,13 +11,18 @@ import {MatDialog} from '@angular/material/dialog';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
 
     data: any = [];
 
     constructor(public dialog: MatDialog, private http: ServiceOAuthService, private cardService: CardsServiceService) {
 
+        this.DataCards();
+
+    }
+
+    ngAfterViewInit(): void {
 
     }
 
@@ -39,6 +44,8 @@ export class DashboardComponent implements OnInit {
                         easing: Chartist.Svg.Easing.easeOutQuint
                     }
                 });
+
+
             } else if (data.type === 'point') {
                 seq++;
                 data.element.animate({
@@ -50,6 +57,11 @@ export class DashboardComponent implements OnInit {
                         easing: 'ease'
                     }
                 });
+            }
+            if (data.type == 'line') {
+
+                data.element.animate({});
+
             }
         });
 
@@ -82,111 +94,122 @@ export class DashboardComponent implements OnInit {
 
     async ngOnInit() {
 
-        await this.DataCards();
+
+        /*     console.log(this.data.listaEntradasSemanales);
         const dataDailySalesChart: any = {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+
             series: [
-                [0, 12, 7, 17, 23, 18, 38]
+                [this.data.listaEntradasSemanales[0].entradas, this.data.listaEntradasSemanales[1].entradas, this.data.listaEntradasSemanales[2].entradas, this.data.listaEntradasSemanales[3].entradas, this.data.listaEntradasSemanales[4].entradas, this.data.listaEntradasSemanales[5].entradas, this.data.listaEntradasSemanales[6].entradas]
             ]
-        };
-
-        const optionsDailySalesChart: any = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 50, // Sulluscocha: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {top: 0, right: 0, bottom: 0, left: 0},
-        }
-
-        var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-        this.startAnimationForLineChart(dailySalesChart);
-
-
-        /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-        const dataCompletedTasksChart: any = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [
-                [230, 750, 450, 300, 280, 240, 200]
-            ]
-        };
-
-        const optionsCompletedTasksChart: any = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 1000, // Sulluscocha: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {top: 0, right: 0, bottom: 0, left: 0}
-        }
-
-        var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-        // start animation for the Completed Tasks Chart - Line Chart
-        this.startAnimationForLineChart(completedTasksChart);
-
-
-        /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
-
-        var datawebsiteViewsChart = {
-            labels: ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
-            series: [
-                [5420, 4430, 3200, 7800, 5530, 4530, 3260, 4340, 5680, 6100, 7560, 8950]
-
-            ]
-        };
-        var optionswebsiteViewsChart = {
-            axisX: {
-                showGrid: false
-            },
-            low: 0,
-            high: 100000,
-            chartPadding: {top: 0, right: 5, bottom: 0, left: 0}
-        };
-        var responsiveOptions: any[] = [
-            ['screen and (max-width: 640px)', {
-                seriesBarDistance: 5,
-                axisX: {
-                    labelInterpolationFnc: function (value) {
-                        return value[0];
-                    }
-                }
-            }]
-        ];
-        var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
-
-        //start animation for the Emails Subscription Chart
-        this.startAnimationForBarChart(websiteViewsChart);
+        };*/
 
 
     }
 
 
-    async DataCards() {
+    DataCards() {
 
 
-        await this.cardService.cargarDashboard().subscribe(value => {
+        this.cardService.cargarDashboard().subscribe(value => {
 
             this.data = value;
+            console.log(this.data);
+            const dataDailySalesChart: any = {
+                labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
 
-            this.cardService.getRol().subscribe(value => {
+                series: [
+                    [this.data.listaEntradasSemanales[0].entradas, this.data.listaEntradasSemanales[1].entradas, this.data.listaEntradasSemanales[2].entradas, this.data.listaEntradasSemanales[3].entradas, this.data.listaEntradasSemanales[4].entradas, this.data.listaEntradasSemanales[5].entradas, this.data.listaEntradasSemanales[6].entradas]
+                ]
+            }
+
+            const optionsDailySalesChart: any = {
+                lineSmooth: Chartist.Interpolation.cardinal({
+                    tension: 0
+                }),
+                low: 0,
+                high: 50,
+                chartPadding: {top: 0, right: 0, bottom: 0, left: 0},
+
+            }
+
+            var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+
+            this.startAnimationForLineChart(dailySalesChart);
+
+
+            /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+
+            const dataCompletedTasksChart: any = {
+                labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                series: [
+                    [this.data.listaSalidasSemanales[0].salidas, this.data.listaSalidasSemanales[1].salidas, this.data.listaSalidasSemanales[2].salidas, this.data.listaSalidasSemanales[3].salidas, this.data.listaSalidasSemanales[4].salidas, this.data.listaSalidasSemanales[5].salidas, this.data.listaSalidasSemanales[6].salidas]
+                ]
+            };
+
+            const optionsCompletedTasksChart: any = {
+                lineSmooth: Chartist.Interpolation.cardinal({
+                    tension: 0
+                }),
+                low: 0,
+                high: 50, // Sulluscocha: we recommend you to set the high sa the biggest value + something for a better look
+                chartPadding: {top: 0, right: 0, bottom: 0, left: 0}
+            }
+
+            var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+
+            // start animation for the Completed Tasks Chart - Line Chart
+            this.startAnimationForLineChart(completedTasksChart);
+
+
+            /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
+
+            var datawebsiteViewsChart = {
+                labels: ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+                series: [
+                    [5420, 4430, 3200, 7800, 5530, 4530, 3260, 4340, 5680, 6100, 7560, 8950]
+
+                ]
+            };
+            var optionswebsiteViewsChart = {
+                axisX: {
+                    showGrid: false
+                },
+                low: 0,
+                high: 100000,
+                chartPadding: {top: 0, right: 5, bottom: 0, left: 0}
+            };
+            var responsiveOptions: any[] = [
+                ['screen and (max-width: 640px)', {
+                    seriesBarDistance: 5,
+                    axisX: {
+                        labelInterpolationFnc: function (value) {
+                            return value[0];
+                        }
+                    }
+                }]
+            ];
+            var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
+
+            //start animation for the Emails Subscription Chart
+            this.startAnimationForBarChart(websiteViewsChart);
+
+
+            this.cardService.getRol().subscribe(value2 => {
 
                 // @ts-ignore
-                localStorage.setItem('rol', String(value.rol));
+                localStorage.setItem('rol', String(value2.rol));
                 // @ts-ignore
-                localStorage.setItem('id', String(value.idalmacen));
+                localStorage.setItem('id', String(value2.idalmacen));
                 // @ts-ignore
-                localStorage.setItem('cargo', String(value.cargo));
+                localStorage.setItem('cargo', String(value2.cargo));
                 // @ts-ignore
-                localStorage.setItem('almacen', String(value.almacen));
+                localStorage.setItem('almacen', String(value2.almacen));
 
 
             })
 
         })
-
 
 
     }
