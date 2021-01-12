@@ -34,14 +34,17 @@ export class NavbarComponent implements OnInit {
         audio.src = '../../../assets/audio/notificacion.mp3';
         audio.load();
 
-        this.stomp.watch(this.urlWatch + this.url.getAlmacen()).subscribe(value => {
+        this.stomp.watch(this.urlWatch + this.url.getAlmacen(), {
+            Authorization: this.url.getAlmacen()
+        }).subscribe(value => {
             console.log(value);
             this.data = JSON.parse(value.body);
 
 
-
         })
-        this.stomp.watch(this.urlWatch + 'nuevo/' + this.url.getAlmacen()).subscribe(value => {
+        this.stomp.watch(this.urlWatch + 'nuevo/' + this.url.getAlmacen(), {
+            Authorization: this.url.getAlmacen()
+        }).subscribe(value => {
             console.log(value);
             this.data = JSON.parse(value.body);
 

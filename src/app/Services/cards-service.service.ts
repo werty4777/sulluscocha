@@ -36,7 +36,7 @@ export class CardsServiceService {
 
 
     getRol() {
-
+        console.log('entre al rol')
         return this.http.get(this.URL.getURL() + 'user/me');
     }
 

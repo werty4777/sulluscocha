@@ -8,18 +8,19 @@ import {AuthGuardGuard} from './guards/auth-guard.guard';
 import {LoginGuardGuard} from './guards/login-guard.guard';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 
+
 const routes: Routes = [
     {
         path: '',
         redirectTo: 'home',
 
         pathMatch: 'full',
-        canActivate: [AuthGuardGuard]
+        canActivate: []
     },
     {
         path: 'login',
         component: LoginComponent,
-        canActivate:[LoginGuardGuard]
+        canActivate:[]
     },
 
     {
@@ -29,13 +30,13 @@ const routes: Routes = [
             path: '',
 
             loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule',
-            canActivate: [AuthGuardGuard]
-        }], canActivate: [AuthGuardGuard]
+            canActivate: []
+        }], canActivate: []
     },
 
     {
         path: '**',
-        component: LoginComponent, canActivate: [AuthGuardGuard]
+        component: LoginComponent, canActivate: []
     },
 ];
 

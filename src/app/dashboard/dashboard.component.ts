@@ -205,7 +205,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 localStorage.setItem('cargo', String(value2.cargo));
                 // @ts-ignore
                 localStorage.setItem('almacen', String(value2.almacen));
-
+                // @ts-ignore
+                localStorage.setItem('sesionId', String(value2.sesionId))
 
             })
 
