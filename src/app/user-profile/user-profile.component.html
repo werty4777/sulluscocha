@@ -13,7 +13,7 @@
 
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input disabled placeholder="Correo Electronico" matInput placeholder="{{user.email}}" type="email">
+                                        <input disabled placeholder="Correo Electronico" matInput placeholder="{{this.user.email}}" type="email">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -21,13 +21,13 @@
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
                                         <input disabled matInput placeholder="Nombres" matInput type="text"
-                                               value="{{user.lastName}}">
+                                               value="{{this.user.lastName}}">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
                                         <input disabled matInput placeholder="Apellidos " matInput type="text"
-                                               value="{{user.name}}">
+                                               value="{{this.user.name}}">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -72,12 +72,12 @@
                 <div class="card card-profile">
                     <div class="card-avatar">
                         <a href="javascript:void(0)">
-                            <img class="img" src="{{user.photo}}"/>
+                            <img class="img" src="{{this.user.photo}}"/>
                         </a>
                     </div>
                     <div class="card-body">
                         <h6 class="card-category text-gray">Almacenero</h6>
-                        <h4 class="card-title">{{user.lastName}} {{user.name}}</h4>
+                        <h4 class="card-title">{{this.user.lastName}} {{this.user.name}}</h4>
                         <p class="card-description">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid blanditiis corporis dignissimos dolores ea eius, eveniet illo incidunt itaque necessitatibus nisi officia, quis sint soluta tenetur velit vitae voluptatem.
                         </p>

@@ -5,8 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-modal-editar-requerimiento',
-    templateUrl: './modal-editar-requerimiento.component.html',
-    styleUrls: ['./modal-editar-requerimiento.component.css']
+    templateUrl: 'modal-editar-requerimiento.component.html',
+    styleUrls: ['modal-editar-requerimiento.component.css']
 })
 export class ModalEditarRequerimientoComponent implements OnInit {
     displayedColumns: string[] = ['codigo', 'descripcion', 'cantidad'];
@@ -17,13 +17,13 @@ export class ModalEditarRequerimientoComponent implements OnInit {
     data: any;
     almacenid: any;
     rol: any;
-    puedoconfirmar: Boolean = false;
+    public puedoconfirmar: Boolean = false;
     @Input()
-    private idRequerimiento: string;
+     idRequerimiento: string;
     @Input()
-    private op: number;
+    op: number;
     @Input()
-    private tipo: string;
+    public  tipo: string;
 
     constructor(public dialog: MatDialog, private requerimentoService: RequerimientoService) {
 

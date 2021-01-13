@@ -6,8 +6,8 @@ import {RequerimientoService} from '../../Services/Requerimiento/requerimiento.s
 
 @Component({
     selector: 'app-salida-modal',
-    templateUrl: './salida-modal.component.html',
-    styleUrls: ['./salida-modal.component.css']
+    templateUrl: 'salida-modal.component.html',
+    styleUrls: ['salida-modal.component.css']
 })
 export class SalidaModalComponent implements OnInit {
 
@@ -23,10 +23,10 @@ export class SalidaModalComponent implements OnInit {
         valeSalida: new FormControl('ninguno'),
         empleado: new FormControl(),
     });
-    empleados: any;
-    private data: any;
+    public empleados: any;
+    public data: any;
     @Input()
-    private codigo: string;
+    public codigo: string;
 
     constructor(public dialog: MatDialog, private req: RequerimientoService, private builder: FormBuilder) {
 

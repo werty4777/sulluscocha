@@ -16,7 +16,7 @@ export class ReportTablaComponent implements OnInit {
     fileName = 'reporte.xlsx';
     data: ReporteModel;
     dataSource: MatTableDataSource<DetalleReporte>;
-    private columnas: string[] = ['codigo',
+    public columnas: string[] = ['codigo',
         'descripcion',
         'modelo',
         'marca',
