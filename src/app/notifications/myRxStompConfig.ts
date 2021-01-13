@@ -3,7 +3,7 @@ import {InjectableRxStompConfig} from '@stomp/ng2-stompjs';
 export const myRxStompConfig: InjectableRxStompConfig = {
 
 
-    brokerURL: 'ws://notificacionesservice.herokuapp.com/chat',
+    brokerURL: 'wss://notificacionesservice.herokuapp.com/chat',
 
     heartbeatIncoming: 0, // Typical value 0 - disabled
     heartbeatOutgoing: 0, // Typical value 20000 - every 20 seconds
