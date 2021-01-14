@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import * as XLSX from 'xlsx';
 import {jsPDF} from 'jspdf';
 import html2canvas from 'html2canvas';
+import {UrlAPI} from '../../Services/urlAPI';
 
 @Component({
     selector: 'app-report-tabla',
@@ -33,7 +34,7 @@ export class ReportTablaComponent implements OnInit {
         'existenciasSalidas',
         'totalExistencias']
 
-    constructor(private req: CardsServiceService) {
+    constructor(private req: CardsServiceService, private url: UrlAPI) {
         this.req.cargarReporte().subscribe(value => {
 
             this.data = value;
@@ -79,46 +80,14 @@ export class ReportTablaComponent implements OnInit {
 
     }
 
-    async downloadAsPDF() {
-        const doc = new jsPDF(
-            {
-                orientation: 'l',
-                unit: 'pt',
+    downloadAsPDF() {
+
+        window.open(this.url.getURL() + 'reporte/' + localStorage.getItem('token'));
 
 
-            }
-        );
-
-        const specialElementHandlers = {
-            '#editor': function (element, renderer) {
-                return true;
-            }
-        };
-
-        const pdfTable = this.pdfTable.nativeElement;
-
-
-        await doc.html(pdfTable.innerHTML, {
-            x: 0,
-            y: 0,
-            html2canvas: {
-                width: 5000,
-                height: 1000,
-                scale: 0.84,
-                svgRendering:true,
-                letterRendering:true,
-                windowWidth: 1920
-            },
-
-        });
-
-
-        await doc.save('tableToPdf.pdf');
     }
 
     exportpdf() {
-
-
 
 
         let data = document.getElementById('pdfTable');
