@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as Chartist from 'chartist';
+import * as Chartistplugin from 'chartist-plugin-tooltips';
 import {ServiceOAuthService} from '../authService/service-oauth.service';
 import {CardsServiceService} from '../Services/cards-service.service';
 import {ModalComponent} from '../components/modal/modal.component';
@@ -15,12 +16,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
     data: any = [];
+    plugin;
 
     constructor(public dialog: MatDialog, private http: ServiceOAuthService, private cardService: CardsServiceService) {
+        this.plugin = Chartistplugin;
 
         this.DataCards();
 
     }
+
 
     ngAfterViewInit(): void {
 
@@ -119,17 +123,41 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
 
                 series: [
-                    [this.data.listaEntradasSemanales[0].entradas, this.data.listaEntradasSemanales[1].entradas, this.data.listaEntradasSemanales[2].entradas, this.data.listaEntradasSemanales[3].entradas, this.data.listaEntradasSemanales[4].entradas, this.data.listaEntradasSemanales[5].entradas, this.data.listaEntradasSemanales[6].entradas]
+                    [{
+                        meta: 'dato',
+                        value: this.data.listaEntradasSemanales[0].entradas
+                    }, {meta: 'adrian', value: this.data.listaEntradasSemanales[1].entradas}, {
+                        meta: 'ad',
+                        value: 10
+                    }, {
+                        meta: 'adrian',
+                        value: this.data.listaEntradasSemanales[3].entradas
+                    }, {
+                        meta: 'adrian',
+                        value: this.data.listaEntradasSemanales[4].entradas
+                    }, {
+                        meta: 'adrian',
+                        value: this.data.listaEntradasSemanales[5].entradas,
+                    }, {
+                        meta: 'adrian',
+                        value: this.data.listaEntradasSemanales[6].entradas
+                    }]
                 ]
             }
+
 
             const optionsDailySalesChart: any = {
                 lineSmooth: Chartist.Interpolation.cardinal({
                     tension: 0
                 }),
-                low: 0,
-                high: 50,
-                chartPadding: {top: 0, right: 0, bottom: 0, left: 0},
+
+                pointDotRadius: 3,
+                datasetStrokeWidth: 1,
+                plugins: [
+                    Chartist.plugins.tooltip({
+                        anchorToPoint: false
+                    })
+                ]
 
             }
 
@@ -151,9 +179,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                 lineSmooth: Chartist.Interpolation.cardinal({
                     tension: 0
                 }),
-                low: 0,
-                high: 50, // Sulluscocha: we recommend you to set the high sa the biggest value + something for a better look
-                chartPadding: {top: 0, right: 0, bottom: 0, left: 0}
+
+
+                plugins: [
+                    Chartist.plugins.tooltip()
+                ]
             }
 
             var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
@@ -173,11 +203,23 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             };
             var optionswebsiteViewsChart = {
                 axisX: {
-                    showGrid: false
+                    showGrid: false,
+                    offset: 15
                 },
-                low: 0,
-                high: 100000,
-                chartPadding: {top: 0, right: 5, bottom: 0, left: 0}
+                axisY: {
+                    offset: 80,
+                    labelInterpolationFnc: function (value) {
+                        return value;
+                    },
+                    scaleMinSpace: 12
+                },
+
+                chartPadding: {top: 0, right: 5, bottom: 0, left: 0},
+                plugins: [
+                    Chartist.plugins.tooltip({
+                        anchorToPoint: false
+                    })
+                ]
             };
             var responsiveOptions: any[] = [
                 ['screen and (max-width: 640px)', {
@@ -185,8 +227,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                     axisX: {
                         labelInterpolationFnc: function (value) {
                             return value[0];
-                        }
-                    }
+                        },
+
+
+                    },
+
                 }]
             ];
             var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
@@ -229,5 +274,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             this.DataCards();
 
         })
+    }
+
+    prueba(tooltipModel) {
+        const elemento: HTMLDivElement = document.createElement('div') as HTMLDivElement;
+        elemento.style.width = '100px';
+        elemento.style.height = '100px';
+        elemento.style.backgroundImage = ' url(./assets/img/sidebar-4.jpg)';
+        elemento.className = 'clasenueva';
+
+
+
+
+        elemento.addEventListener('mouseover', ev => {
+            elemento.appendChild(document.createElement('span'));
+        });
+
+        elemento.addEventListener('mouseleave', ev => {
+            alert('eliminado')
+            document.getElementsByClassName('clasenueva')[0].outerHTML = '';
+        });
+
+        document.body.appendChild(elemento);
+
     }
 }

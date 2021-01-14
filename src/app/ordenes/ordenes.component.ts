@@ -45,6 +45,7 @@ export class OrdenesComponent implements OnInit {
                 this.data = value1;
 
             });
+            console.log('bien')
         })
 
 
@@ -64,6 +65,7 @@ export class OrdenesComponent implements OnInit {
                 this.data = value1;
 
             });
+            console.log('bien')
         })
     }
 }

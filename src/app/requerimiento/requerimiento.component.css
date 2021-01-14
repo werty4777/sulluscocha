@@ -10,3 +10,17 @@
 .addButton > i {
     color: black;
 }
+
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+
+}
+.mat-form-field-wrapper{
+    padding-right: 40px !important;
+}
+

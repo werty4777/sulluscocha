@@ -23,6 +23,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item"  style="cursor:pointer;" (click)="verRequerimiento(item.idRequerimiento,item.tipoRequerimiento)" *ngFor="let item of data">{{item.mensaje}}</a>
+                        <a class="dropdown-item"  style="cursor:pointer;" *ngIf="this.data.length==0" >Sin notificaciones</a>
 
                     </div>
                 </li>

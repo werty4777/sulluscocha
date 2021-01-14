@@ -16,154 +16,134 @@
                         <h4 class="card-title ">Mis requerimientos</h4>
                         <p class="card-category"> Lista de requerimientos realizidas por este almacen</p>
                     </div>
-
+                    <br>
+                    <mat-form-field >
+                        <mat-label>Buscar</mat-label>
+                        <input #input (keyup)="applyFilter($event)" matInput>
+                    </mat-form-field>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <th>
-                                    Codigo de Requerimiento
-                                </th>
-                                <th>
-                                    Empleado
-                                </th>
-
-                                <th>
-                                    Fecha de emision
-                                </th>
-                                <th>
-                                    Tipo de Requerimiento
-                                </th>
-                                <th>
-                                    Estado de requerimiento
-                                </th>
-                                <th>
-                                    Detalles
-                                </th>
-
-                                <th>
-                                    Rechazar
-                                </th>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let dat of datos;">
-                                    <td>
-                                        {{dat.codigo}}
-
-                                    </td>
-                                    <td>
-                                        {{dat.empleado}}
-
-                                    </td>
-
-                                    <td>
-                                        {{dat.fechaEmision}}
-
-                                    </td>
-                                    <td>
-                                        {{dat.tipoRequerimiento}}
-                                    </td>
-                                    <td class="text-primary">
-                                        {{dat.estadoRequerimiento}}
-                                    </td>
-                                    <td>
-                                        <i (click)="editarRequerimiento('detalles',dat.codigo,dat.tipoRequerimiento)"
-                                           class="fas fa-search"></i>
-
-                                    </td>
+                            <table [dataSource]="this.datos" mat-table matSort>
 
 
+                                <ng-container matColumnDef="codigo">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Codigo</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.codigo}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="empleado">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Empleado</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.empleado}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="fechaemision">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Fecha de emision</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.fechaEmision}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="tiporequerimiento">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Tipo de requerimiento</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.tipoRequerimiento}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="estadorequerimiento">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Estado de requerimiento</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.estadoRequerimiento}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="detalles">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> detalles</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell><i
+                                            (click)="editarRequerimiento('detalles',row.codigo,row.tipoRequerimiento)"
+                                            class="fas fa-search"></i></td>
+                                </ng-container>
+                                <ng-container matColumnDef="rechazar">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Rechazar</th>
+                                    <td *matCellDef="let row; let i = index"
+                                        mat-cell><i (click)="rechazarRequerimiento(row.codigo)"
+                                                    class="fas fa-trash-alt"></i></td>
+                                </ng-container>
 
-                                    <td>
 
-                                        <i class="fas fa-trash-alt" (click)="rechazarRequerimiento(dat.codigo)"></i>
+                                <tr *matHeaderRowDef="columnas" mat-header-row></tr>
+                                <tr *matRowDef="let row; columns: columnas;" mat-row></tr>
 
+                                <!-- Row shown when there is no matching data. -->
+                                <tr *matNoDataRow class="mat-row">
+                                    <td class="mat-cell" colspan="4">Sin requerimientos
                                     </td>
                                 </tr>
-
-
-                                </tbody>
                             </table>
+
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                                           label="Requerimientos por pagina"></mat-paginator>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div class="row" *ngIf="this.rol==1">
+        <div *ngIf="this.rol==1" class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title ">Peticiones de requerimientos</h4>
                         <p class="card-category"> Lista de peticiones de requerimientos</p>
                     </div>
-
+<br>
+                    <mat-form-field>
+                        <mat-label>Buscar</mat-label>
+                        <input #input2 (keyup)="applyFilter2($event)" matInput>
+                    </mat-form-field>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                <th>
-                                    Codigo de Requerimiento
-                                </th>
-                                <th>
-                                    Remitente
-                                </th>
 
-                                <th>
-                                    Fecha de emision
-                                </th>
-                                <th>
-                                    Tipo de Requerimiento
-                                </th>
-                                <th>
-                                    Estado de requerimiento
-                                </th>
-                                <th>
-                                    Detalles
-                                </th>
+                            <table [dataSource]="this.data2" mat-table matSort >
 
-                                <th>
-                                    Rechazar
-                                </th>
-                                </thead>
-                                <tbody>
-                                <tr *ngFor="let dat of data2">
-                                    <td>
-                                        {{dat.codigo}}
 
-                                    </td>
-                                    <td>
-                                        {{dat.remitente}}
-
-                                    </td>
-
-                                    <td>
-                                        {{dat.fechaEmision}}
-
-                                    </td>
-                                    <td>
-                                        {{dat.tipoRequerimiento}}
-                                    </td>
-                                    <td class="text-primary">
-                                        {{dat.estadoRequerimiento}}
-                                    </td>
-                                    <td>
-                                        <i (click)="editarRequerimiento('detallesEditar',dat.codigo)"
+                                <ng-container matColumnDef="codigo">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Codigo</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.codigo}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="remitente">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Empleado</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.remitente}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="fechaemision">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Fecha de emision</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.fechaEmision}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="tiporequerimiento">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Tipo de requerimiento</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.tipoRequerimiento}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="estadorequerimiento">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Estado de requerimiento</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell> {{row.estadoRequerimiento}} </td>
+                                </ng-container>
+                                <ng-container matColumnDef="detalles">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> detalles</th>
+                                    <td *matCellDef="let row; let i = index" mat-cell>
+                                        <i (click)="editarRequerimiento('detallesEditar',row.codigo)"
                                            class="fas fa-search"></i>
+                                </ng-container>
+                                <ng-container matColumnDef="rechazar">
+                                    <th *matHeaderCellDef mat-header-cell mat-sort-header> Rechazar</th>
+                                    <td *matCellDef="let row; let i = index"
+                                        mat-cell>
+                                        <i (click)="rechazarRequerimientoTraslado(row.codigo)"
+                                           class="fas fa-trash-alt"></i>
+                                </ng-container>
 
-                                    </td>
+
+                                <tr *matHeaderRowDef="columnas2" mat-header-row></tr>
+                                <tr *matRowDef="let row; columns: columnas2;" mat-row></tr>
 
 
-                                    <td>
-
-                                        <i class="fas fa-trash-alt" (click)="rechazarRequerimientoTraslado(dat.codigo)"></i>
-
+                                <tr *matNoDataRow class="mat-row">
+                                    <td class="mat-cell" colspan="4">Sin requerimientos
                                     </td>
                                 </tr>
-
-
-                                </tbody>
                             </table>
+
+
+                            <mat-paginator  [pageSizeOptions]="[5, 10, 25, 100]"
+                                           label="Requerimientos por pagina"></mat-paginator>
                         </div>
                     </div>
                 </div>
