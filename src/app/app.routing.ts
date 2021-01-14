@@ -8,19 +8,18 @@ import {AuthGuardGuard} from './guards/auth-guard.guard';
 import {LoginGuardGuard} from './guards/login-guard.guard';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 
-
 const routes: Routes = [
     {
         path: '',
         redirectTo: 'home',
 
         pathMatch: 'full',
-        canActivate: []
+        canActivate: [AuthGuardGuard]
     },
     {
         path: 'login',
         component: LoginComponent,
-        canActivate:[]
+        canActivate:[LoginGuardGuard]
     },
 
     {
@@ -30,16 +29,15 @@ const routes: Routes = [
             path: '',
 
             loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule',
-            canActivate: []
-        }], canActivate: []
+            canActivate: [AuthGuardGuard]
+        }], canActivate: [AuthGuardGuard]
     },
 
     {
         path: '**',
-        component: LoginComponent, canActivate: []
+        component: LoginComponent, canActivate: [AuthGuardGuard]
     },
 ];
-
 
 @NgModule({
     imports: [
