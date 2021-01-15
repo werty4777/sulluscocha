@@ -12,6 +12,7 @@ export class UrlAPI {
     }
 
 
+
     getToken(): string {
 
         return 'Bearer ' + localStorage.getItem('token').toString();

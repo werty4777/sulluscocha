@@ -22,6 +22,7 @@ import {UserServiceComponent} from './authService/user-service/user-service.comp
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {myRxStompConfig} from './notifications/myRxStompConfig';
 
+
 const googlekey = '583458414138-ktvu19p22476kqobfauu66r5olulppjg.apps.googleusercontent.com';
 
 @NgModule({

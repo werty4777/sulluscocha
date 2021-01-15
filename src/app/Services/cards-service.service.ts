@@ -40,8 +40,13 @@ export class CardsServiceService {
 
     getRol() {
         console.log('entre al rol')
-        return this.http.get(this.URL.getURL() + 'user/me');
+        return this.http.get(this.URL.getURL() + 'user/me', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        });
     }
+
 
     cargarDashboard() {
         return this.http.get(this.URL.getURL() + 'inventario/dashboard');
@@ -66,7 +71,7 @@ export class CardsServiceService {
 
     cargarReporte(): Observable<ReporteModel> {
 
-        return this.http.get(this.URL.getURL() + 'reporte').pipe(map((value: ReporteModel) => {
+        return this.http.get(this.URL.getURL() + 'inventario/reporte').pipe(map((value: ReporteModel) => {
             return value;
         }));
     }

@@ -7,6 +7,7 @@ import {UrlAPI} from '../../Services/urlAPI';
 import {NotificacionModel} from '../../model/notificacionModel';
 import {ModalComponent} from '../modal/modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {CardsServiceService} from '../../Services/cards-service.service';
 
 @Component({
     selector: 'app-navbar',
@@ -27,7 +28,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public dialog: MatDialog, location: Location, private element: ElementRef, private router: Router, private stomp: RxStompService, private url: UrlAPI) {
+    constructor(public dialog: MatDialog, location: Location, private element: ElementRef, private router: Router, private stomp: RxStompService, private url: UrlAPI,private card:CardsServiceService) {
 
 
 
@@ -37,35 +38,55 @@ export class NavbarComponent implements OnInit {
         const audio = new Audio();
         audio.src = '../../../assets/audio/notificacion.mp3';
         audio.load();
+        this.card.cargarDashboard().subscribe(value => {
+            this.card.getRol().subscribe(value2 => {
+
+                // @ts-ignore
+                localStorage.setItem('rol', String(value2.rol));
+                // @ts-ignore
+                localStorage.setItem('id', String(value2.idalmacen));
+                // @ts-ignore
+                localStorage.setItem('cargo', String(value2.cargo));
+                // @ts-ignore
+                localStorage.setItem('almacen', String(value2.almacen));
+                // @ts-ignore
+                localStorage.setItem('sesionId', String(value2.sesionId))
+
+                this.stomp.watch(this.urlWatch + this.url.getAlmacen(), {
+                    Authorization: this.url.getAlmacen()
+                }).subscribe(value => {
+                    console.log(value);
+                    this.data = JSON.parse(value.body);
+
+
+                })
+                this.stomp.watch(this.urlWatch + 'nuevo/' + this.url.getAlmacen(), {
+                    Authorization: this.url.getAlmacen()
+                }).subscribe(value => {
+                    console.log(value);
+                    this.data = JSON.parse(value.body);
+
+                    audio.play();
+
+                })
+
+                this.stomp.publish({
+                    destination: '/app/chat', headers: {
+                        Authorization: this.url.getAlmacen()
+                    }
+                });
+
+
+
+            })
+        })
 
 
     }
 
     ngOnInit() {
-        console.log(this.url.getAlmacen())
-        this.stomp.watch(this.urlWatch + this.url.getAlmacen(), {
-            Authorization: this.url.getAlmacen()
-        }).subscribe(value => {
-            console.log(value);
-            this.data = JSON.parse(value.body);
 
 
-        })
-        this.stomp.watch(this.urlWatch + 'nuevo/' + this.url.getAlmacen(), {
-            Authorization: this.url.getAlmacen()
-        }).subscribe(value => {
-            console.log(value);
-            this.data = JSON.parse(value.body);
-
-            //audio.play();
-
-        })
-
-        this.stomp.publish({
-            destination: '/app/chat', headers: {
-                Authorization: this.url.getAlmacen()
-            }
-        });
 
 
         this.listTitles = ROUTES.filter(listTitle => listTitle);
