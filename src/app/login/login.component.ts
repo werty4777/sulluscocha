@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ServiceOAuthService} from '../authService/service-oauth.service';
+import {CardsServiceService} from '../Services/cards-service.service';
+import {Router} from '@angular/router';
 
 
 const scopeGoogle = {
@@ -17,7 +19,7 @@ const scopeGoogle = {
 export class LoginComponent implements OnInit {
 
 
-    constructor(private auth: ServiceOAuthService) {
+    constructor(private auth: ServiceOAuthService, private cardService: CardsServiceService, private router: Router) {
     }
 
     async ngOnInit() {

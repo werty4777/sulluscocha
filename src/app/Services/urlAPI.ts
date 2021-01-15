@@ -22,3 +22,4 @@ export class UrlAPI {
         return localStorage.getItem('id');
     }
 }
+

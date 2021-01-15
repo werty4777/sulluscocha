@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {UserProfile} from '../model/UserProfile';
 import {UrlAPI} from '../Services/urlAPI';
 import {CardsServiceService} from '../Services/cards-service.service';
@@ -70,6 +70,8 @@ export class ServiceOAuthService {
                     console.log()
                     // @ts-ignore
                     localStorage.setItem('token', JSON.stringify(user.getAuthResponse().access_token).replace('"', '').replace('"', ''));
+
+
                     this.user = user
                     this.handleAuthChange();
                     this.authInstance.isSignedIn.listen(this.handleAuthChange);
@@ -79,8 +81,8 @@ export class ServiceOAuthService {
                     this.error = error
                 });
 
-            this.router.navigate(['']);
 
+            this.router.navigate(['']);
 
         });
 
@@ -110,6 +112,8 @@ export class ServiceOAuthService {
     }
 
     handleAuthChange() {
+
+
         this.state = ({isSignedIn: this.authInstance.isSignedIn.get()});
     };
 

@@ -28,12 +28,21 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
 
     constructor(public dialog: MatDialog, location: Location, private element: ElementRef, private router: Router, private stomp: RxStompService, private url: UrlAPI) {
+
+
+
+
         this.location = location;
         this.sidebarVisible = false;
         const audio = new Audio();
         audio.src = '../../../assets/audio/notificacion.mp3';
         audio.load();
 
+
+    }
+
+    ngOnInit() {
+        console.log(this.url.getAlmacen())
         this.stomp.watch(this.urlWatch + this.url.getAlmacen(), {
             Authorization: this.url.getAlmacen()
         }).subscribe(value => {
@@ -48,14 +57,9 @@ export class NavbarComponent implements OnInit {
             console.log(value);
             this.data = JSON.parse(value.body);
 
-            audio.play();
+            //audio.play();
 
         })
-
-    }
-
-    ngOnInit() {
-
 
         this.stomp.publish({
             destination: '/app/chat', headers: {
