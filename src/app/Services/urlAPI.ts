@@ -8,7 +8,7 @@ export class UrlAPI {
 
 
     getURL(): string {
-        return 'https://serviceprox.herokuapp.com/';
+        return 'https://55ded4053fb7.ngrok.io/';
     }
 
 
